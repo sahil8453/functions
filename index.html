@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-functions.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-analytics.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      var firebaseConfig = {
+        apiKey: "AIzaSyCTCJ9m34jgB5o1d7HCuRI-bC1jusv3WiI",
+        authDomain: "my-functions-b16fa.firebaseapp.com",
+        databaseURL: "https://my-functions-b16fa.firebaseio.com",
+        projectId: "my-functions-b16fa",
+        storageBucket: "my-functions-b16fa.appspot.com",
+        messagingSenderId: "925682903064",
+        appId: "1:925682903064:web:4752f76069457b326f3b6d",
+        measurementId: "G-TFVT7KCQ3P",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      //firebase.analytics();
+    </script>
+
+    <script>
+      function addPerson() {
+        const firstName = document.getElementById("fname").value;
+        const lastName = document.getElementById("lname").value;
+
+        var add = firebase.functions().httpsCallable("addPerson");
+        add({
+          firstName,
+          lastName,
+        })
+          .then((result) => {
+            console.log(result);
+          })
+          .catch((error) => console.log(error));
+      }
+    </script>
+  </head>
+  <body>
+    <input type="text" id="fname" />
+    <input type="text" id="lname" />
+    <button onClick="addPerson()">click me</button>
+  </body>
+</html>
